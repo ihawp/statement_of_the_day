@@ -2,10 +2,12 @@
 
 include 'db_conn.php';
 
+session_start();
+
 $username = htmlspecialchars($_POST['username']);
 $password = htmlspecialchars($_POST['password']);
 
-$query = "SELECT * FROM accounts WHERE username = '$username'";
+$query = "SELECT * FROM accounts WHERE username = '$username' or email = '$username'";
 
 $result = $conn->query($query);
 

@@ -1,14 +1,13 @@
 <?php
 
-session_start();
-
 $servername = "localhost";
-$user = "root";
-$password = "";
+$usernamejskhdfjsdklhfjsdkhfs = "root";
+$passwordasdasdsadsadsa = "";
 $dbname = "mypersonal";
+$port = 3306;
 
 // Create connection
-$conn = new mysqli($servername, $user, $password, $dbname);
+$conn = new mysqli($servername, $usernamejskhdfjsdklhfjsdkhfs, $passwordasdasdsadsadsa, $dbname, $port);
 
 
 if ($conn->connect_error) {

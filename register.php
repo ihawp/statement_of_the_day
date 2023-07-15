@@ -2,11 +2,7 @@
 
 include 'functions.php';
 session_start();
-
-if (isset($_SESSION['username']) && isset($_SESSION['id'])) {
-    header('Location: home.php');
-} else {
-
+alreadyLogged();
 
 ?>
 <!DOCTYPE html>
@@ -17,7 +13,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {
 </head>
 <body class="flex-column center-hor">
 <form id="register-form" class="flex-column center-vert center-hor height-100" action="registerVerify.php" method="POST">
-    <input type="text" placeholder="email" name="email" required>
+    <input type="email" placeholder="email" name="email" required>
     <input type="text" placeholder="username" name="username" required>
     <input type="password" placeholder="password" name="password" required>
     <button type="submit">submit</button>
@@ -25,13 +21,11 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {
     // register error handling
     if (isset($_GET['error'])) {
         $e = $_GET['error'];
-        logregCallError($e);
+        callError($e);
     } ?>
+    <p>Already have an account? <a href="login.php">Login.</a></p>
 </form>
 <script src="https://kit.fontawesome.com/99a47fae58.js" crossorigin="anonymous"></script>
-<script src="main.js"></script>
+<script src="jquery1.js"></script>
 </body>
 </html>
-<?php
-}
-?>

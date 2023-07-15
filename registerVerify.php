@@ -1,5 +1,6 @@
 <?php
 include 'db_conn.php';
+session_start();
 
 $username = htmlspecialchars($_POST['username']);
 $email = htmlspecialchars($_POST['email']);

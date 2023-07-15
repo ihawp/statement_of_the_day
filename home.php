@@ -2,10 +2,9 @@
 
 include 'functions.php';
 session_start();
+checkLogin();
 
-if (!isset($_SESSION['username']) && !isset($_SESSION['id'])) {
-    header('Location: login.php');
-} else { ?>
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,41 +13,32 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['id'])) {
 </head>
 <body class="flex-column center-hor">
 <?php
-
 loadHeader();
-
-function wow($num) {
-    for ($i=0; $i < 500; $i++) {
-        if ($num%2 === 0) {
-            echo 'wow';
-        } else {
-            echo 'sasquatch<br>';
-        }
-    }
-}
-
-function mySQLInput($input) {
-    
-
-    $q = "INPUT INTO accounts WHERE ";
-}
-function mySQLQuery($query) {
-
-}
-
-
-$num = 5;
-wow($num);
-
-
-
+?>
+<div class="width-50 flex-column center-hor">
+    <form class="flex-column" action="postPost.php" method="POST">
+        <textarea class="no-resize width-30 height-15" id="post-box" name="post" placeholder="type something funny" maxlength="255"></textarea>
+        <div class="flex-column width-5">
+            <button type="submit">post</button>
+        </div>
+    </form>
+</div>
+<div class="width-50 flex-column center-hor" id="posts-box">
+    <?php
+    loadPosts();
+    ?>
+</div>
+<button id="load-more-btn">Load More</button>
+<?php
 loadFooter();
 ?>
 <script src="https://kit.fontawesome.com/99a47fae58.js" crossorigin="anonymous"></script>
-<script src="main.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="jquery1.js"></script>
+<script src="jquery2.js"></script>
 </body>
 </html>
 <?php
-}
+
 ?>
 

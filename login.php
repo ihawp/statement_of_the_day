@@ -2,11 +2,7 @@
 
 include 'functions.php';
 session_start();
-
-if (isset($_SESSION['username']) && isset($_SESSION['id'])) {
-    header('Location: home.php');
-} else {
-
+alreadyLogged();
 
 ?>
 <!DOCTYPE html>
@@ -19,18 +15,16 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {
 <form id="login-form" class="flex-column center-vert center-hor height-100" action="loginVerify.php" method="POST">
     <input type="text" placeholder="username" name="username" required>
     <input type="password" placeholder="password" name="password" required>
-    <button type="submit">submit</button>
+    <button type="submit">submit</button required>
     <?php
     // login error handling
     if (isset($_GET['error'])) {
         $e = $_GET['error'];
-        logregCallError($e);
+        callError($e);
     } ?>
+    <p>Don't have an account? <a href="register.php">Register.</a></p>
 </form>
 <script src="https://kit.fontawesome.com/99a47fae58.js" crossorigin="anonymous"></script>
-<script src="main.js"></script>
+<script src="jquery1.js"></script>
 </body>
 </html>
-<?php
-}
-?>
