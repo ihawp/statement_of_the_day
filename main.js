@@ -1,3 +1,7 @@
+// ihawp
+
+
+// load-more-posts.php
 function loadMorePosts() {
     $(document).ready(function() {
         var offset = 5; // Initial offset value
@@ -49,5 +53,23 @@ function stopDisplayCommentBox() {
     comment.style.display = 'none';
 }
 function addComment() {
-
+    $(document).ready(function() {
+        $.ajax({
+            url: "addComment.php",
+            type: "POST",
+            data: { post_id: postID, poster_id: posterID },
+            success: function(response) {
+                var wow = document.getElementById(`post-likes-count-${postID}`)
+                if (response === 'Liked!') {
+                    let current = parseInt(wow.innerText);
+                    wow.innerText = current + 1;
+                } else {
+                    wow.innerText -= 1;
+                }
+            },
+            error: function() {
+                alert("error adding the like");
+            }
+        });
+    });
 }
