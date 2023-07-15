@@ -25,7 +25,13 @@ function addLike(postID, posterID) {
                 type: "POST",
                 data: { post_id: postID, poster_id: posterID },
                 success: function(response) {
-                    console.log(response);
+                    var wow = document.getElementById(`post-likes-count-${postID}`)
+                    if (response === 'Liked!') {
+                        let current = parseInt(wow.innerText);
+                        wow.innerText = current + 1;
+                    } else {
+                        wow.innerText -= 1;
+                    }
                 },
                 error: function() {
                     alert("error adding the like");
@@ -35,7 +41,12 @@ function addLike(postID, posterID) {
 }
 
 function displayCommentBox() {
-
+    const main = document.getElementById("comment-popup");
+    main.style.display = 'flex';
+}
+function stopDisplayCommentBox() {
+    const comment = document.getElementById("comment-popup");
+    comment.style.display = 'none';
 }
 function addComment() {
 

@@ -29,7 +29,8 @@ if (isset($_GET['viewuser'])) {
 loadFooter();
 ?>
 <script src="https://kit.fontawesome.com/99a47fae58.js" crossorigin="anonymous"></script>
-<script src="jquery1.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="main.js"></script>
 </body>
 </html>
 

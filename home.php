@@ -11,7 +11,15 @@ checkLogin();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
 </head>
-<body class="flex-column center-hor">
+<body class="flex-column center-hor" id="body">
+<div id="comment-popup" class="blur-background position-absolute comment-box width-100 height-100 center-vert center-hor">
+    <form action="" method="POST">
+        <textarea class="no-resize width-30 height-15" id="post-box" name="comment-box" placeholder="type something funny" maxlength="255"></textarea>
+        <div class="flex-column width-5">
+            <button type="submit">post</button>
+        </div>
+    </form>
+</div>
 <?php
 loadHeader();
 ?>

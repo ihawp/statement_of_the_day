@@ -98,7 +98,7 @@ function generatePost($username, $posterID, $message, $likes, $postID) {
     echo '<p>'. $message .'</p>';
     echo '<p>'.$postID.'</p>';
         echo '<div class="flex-row">';
-            echo '<button class="height-5 width-5" onclick="addLike('.$postID.','. $posterID.')" id="like-btn"><i class="fa-solid fa-heart"></i></button> <p>'. $likes .'</p>';
+            echo '<button class="height-5 width-5" onclick="addLike('.$postID.','. $posterID.')" id="like-btn"><i class="fa-solid fa-heart"></i></button> <p id="post-likes-count-'.$postID.'">'. $likes .'</p>';
             echo '<button class="height-5 width-5" onclick="displayCommentBox()" id="comment-btn"><i class="fa-solid fa-comment"></i></button>';
         echo '</div>';
     echo '</div>';
