@@ -83,15 +83,24 @@ function loadUsername($id, $conn) {
     }
 }
 
+function viewPost() {
+
+}
+function loadComments() {
+
+}
 
 // posting
-function generatePost($username, $message, $likes, $postID) {
-    echo '<div href="viewpost.php" class="post width-30">';
+function generatePost($username, $posterID, $message, $likes, $postID) {
+    echo '<div class="post width-30">';
     echo '<p>'.$username.'</p>';
     echo '<a href="user.php?viewuser='.$username.'">@'. $username .'</a>';
     echo '<p>'. $message .'</p>';
     echo '<p>'.$postID.'</p>';
-    echo '<button id="like-btn"><3</button> <p>'. $likes .'</p>';
+        echo '<div class="flex-row">';
+            echo '<button class="height-5 width-5" onclick="addLike('.$postID.','. $posterID.')" id="like-btn"><i class="fa-solid fa-heart"></i></button> <p>'. $likes .'</p>';
+            echo '<button class="height-5 width-5" onclick="displayCommentBox()" id="comment-btn"><i class="fa-solid fa-comment"></i></button>';
+        echo '</div>';
     echo '</div>';
 }
 function loadPosts() {
@@ -106,7 +115,7 @@ function loadPosts() {
             $likes = $row['likes'];
             $postID = $row['post_id'];
             $s = loadUsername($id, $conn);
-            generatePost($s, $row['content'], $likes, $postID);
+            generatePost($s, $id, $row['content'], $likes, $postID);
         }
     } else {
         echo 'No posts found.';
@@ -128,7 +137,7 @@ function profileLoadPosts() {
             $likes = $row['likes'];
             $postID = $row['post_id'];
             $s = loadUsername($id, $conn);
-            generatePost($s, $row['content'], $likes, $postID);
+            generatePost($s, $id, $row['content'], $likes, $postID);
         }
     } else {
         echo 'No posts found.';
@@ -158,7 +167,7 @@ function loadViewingPosts($viewuser) {
                 $message = $row['content'];
                 $likes = $row['likes'];
                 $postID = $row['post_id'];
-                generatePost($viewuser, $message, $likes, $postID);
+                generatePost($viewuser, $viewingID, $message, $likes, $postID);
             }
         } else {
             callError('No posts found.');

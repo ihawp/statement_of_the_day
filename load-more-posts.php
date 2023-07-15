@@ -24,7 +24,7 @@ function loadMorePosts($offset, $limit) {
             $likes = $row['likes'];
             $postID = $row['post_id'];
             $s = loadUsername($id, $conn);
-            generatePost($s, $row['content'], $likes, $postID);
+            generatePost($s, $id, $row['content'], $likes, $postID);
         }
     } else {
         echo 'No more posts found.';

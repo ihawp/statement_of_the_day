@@ -85,6 +85,14 @@ input {
 
     }
 
+/* home.php */
+.like-btn {
+    cursor: pointer;
+}
+.comment-btn {
+    cursor: pointer;
+}
+
 /* REUSE flex classes */
 .flex-row { display: flex; flex-direction: row; }
 .flex-column { display: flex; flex-direction: column; }

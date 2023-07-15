@@ -7,19 +7,16 @@ $email = htmlspecialchars($_POST['email']);
 $password = htmlspecialchars($_POST['password']);
 
 // Check if username or email already exists
-$existingUserQuery = "SELECT * FROM accounts WHERE username = '$username' OR email = '$email'";
-$existingUserResult = $conn->query($existingUserQuery);
+$userExisting = "SELECT * FROM accounts WHERE username = '$username' OR email = '$email'";
+$uEResult = $conn->query($userExisting);
 
-if ($existingUserResult && $existingUserResult->num_rows > 0) {
+if ($uEResult && $uEResult->num_rows > 0) {
     // Redirect back to the registration page with an error message
     header('Location: register.php?error=existing_user');
     exit;
 }
 
-// Hash the password
 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
-// Insert the user into the database
 $insertQuery = "INSERT INTO accounts (username, email, password) VALUES ('$username', '$email', '$hashedPassword')";
 $insertResult = $conn->query($insertQuery);
 
@@ -31,13 +28,11 @@ if ($insertResult) {
             $id = $row['id'];
         }
     }
-    // Redirect to the login page with a success message
     $_SESSION['username'] = $username;
     $_SESSION['id'] = $id;
     header('Location: home.php');
     exit;
 } else {
-    // Redirect back to the registration page with an error message
     header('Location: register.php?error=registration_failed');
     exit;
 }
