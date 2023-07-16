@@ -3,6 +3,7 @@
 include 'functions.php';
 session_start();
 checkLogin();
+$userID = $_SESSION['id'];
 
 ?>
 <!DOCTYPE html>
@@ -13,13 +14,10 @@ checkLogin();
 </head>
 <body class="flex-column center-hor" id="body">
 <div id="comment-popup" class="blur-background position-absolute comment-box width-100 height-100 center-vert center-hor">
-    <form action="" method="POST">
         <a onclick="stopDisplayCommentBox()"><i class="fa-solid fa-x"></i></a>
-        <textarea class="no-resize width-30 height-15" id="post-box" name="comment-box" placeholder="type something funny" maxlength="255"></textarea>
-        <div class="flex-column width-5">
-            <button type="submit">post</button>
+        <textarea class="no-resize width-30 height-15" id="comment-box" name="comment-box" placeholder="typasdasdsadsadsadsa" maxlength="255"></textarea>
+        <div id="add-comment-button-div" class="flex-column width-5">
         </div>
-    </form>
 </div>
 <?php
 loadHeader();

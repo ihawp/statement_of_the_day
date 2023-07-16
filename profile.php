@@ -12,6 +12,12 @@ checkLogin();
         <link rel="stylesheet" href="styles.css">
     </head>
     <body class="flex-column center-hor">
+    <div id="comment-popup" class="blur-background position-absolute comment-box width-100 height-100 center-vert center-hor">
+        <a onclick="stopDisplayCommentBox()"><i class="fa-solid fa-x"></i></a>
+        <textarea class="no-resize width-30 height-15" id="comment-box" name="comment-box" placeholder="typasdasdsadsadsadsa" maxlength="255"></textarea>
+        <div id="add-comment-button-div" class="flex-column width-5">
+        </div>
+    </div>
     <?php
     loadHeader();
     ?>

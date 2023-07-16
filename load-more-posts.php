@@ -8,9 +8,6 @@ $offset = $_POST['offset'];
 $limit = $_POST['limit'];
 
 
-loadMorePosts($offset, $limit);
-
-function loadMorePosts($offset, $limit) {
     include_once 'db_conn.php';
 
     $query = "SELECT * FROM posts
@@ -31,4 +28,3 @@ function loadMorePosts($offset, $limit) {
     }
 
     $conn->close();
-}

@@ -4,6 +4,8 @@ session_start();
 include 'functions.php';
 checkLogin();
 
+$postID = $_GET['postID'];
+$username = $_GET['username'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,17 +22,11 @@ checkLogin();
 </div>
 <?php
 loadHeader();
+?>
 
-if (isset($_GET['viewuser'])) {
-    $viewuser = $_GET['viewuser'];
-    if ($viewuser === $_SESSION['username']) {
-        header('Location: profile.php');
-    } else {
-        loadViewingPosts($viewuser);?>
-    <?php }
-} else {
-    echo 'No posts found.';
-}
+<?php
+
+loadPostANDComments($postID, $username, true);
 
 loadFooter();
 ?>
@@ -39,5 +35,3 @@ loadFooter();
 <script src="main.js"></script>
 </body>
 </html>
-
-

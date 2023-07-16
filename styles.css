@@ -55,7 +55,16 @@ input {
     padding: 20px;
     color: var(--fourth-color);
 }
-.error-icon {
+.noti-icon {
+    margin: 10px 10px 10px 20px;
+}
+#success-box {
+    background-color: green;
+    border-radius: 50px;
+    padding: 20px;
+    color: var(--fourth-color);
+}
+.noti-icon {
     margin: 10px 10px 10px 20px;
 }
 

@@ -38,7 +38,7 @@ function callError($e) {
     }
     echo '
         <div id="error-box" class="flex-row center-hor width-100">
-            <h1><i class="fa-solid fa-circle-exclamation error-icon"></i> ' . $stmt . '</h1>
+            <h1><i class="fa-solid fa-circle-exclamation noti-icon"></i> ' . $stmt . '</h1>
         </div>
     ';
 }
@@ -97,14 +97,65 @@ function generatePost($username, $posterID, $message, $likes, $postID) {
     echo '<a href="user.php?viewuser='.$username.'">@'. $username .'</a>';
     echo '<p>'. $message .'</p>';
     echo '<p>'.$postID.'</p>';
-        echo '<div class="flex-row">';
-            echo '<button class="height-5 width-5" onclick="addLike('.$postID.','. $posterID.')" id="like-btn"><i class="fa-solid fa-heart"></i></button> <p id="post-likes-count-'.$postID.'">'. $likes .'</p>';
-            echo '<button class="height-5 width-5" onclick="displayCommentBox()" id="comment-btn"><i class="fa-solid fa-comment"></i></button>';
-        echo '</div>';
+    echo '<a href="viewpost.php?postID='.$postID.'&username='.$username.'">view post</a>';
+    echo '<div class="flex-row">';
+    echo '<button class="height-5 width-5" onclick="addLike('.$postID.','. $posterID.')" id="like-btn"><i class="fa-solid fa-heart"></i></button> <p id="post-likes-count-'.$postID.'">'. $likes .'</p>';
+    echo '<button class="height-5 width-5" onclick="displayCommentBox('.$postID.')" id="comment-btn"><i class="fa-solid fa-comment"></i></button>';
+    echo '</div>';
     echo '</div>';
 }
+function generateComments($username, $posterID, $message, $likes, $postID) {
+    echo '<div class="post width-30">';
+    echo '<p>'.$username.'</p>';
+    echo '<a href="user.php?viewuser='.$username.'">@'. $username .'</a>';
+    echo '<p>'. $message .'</p>';
+    echo '<p>'.$postID.'</p>';
+    echo '<div class="flex-row">';
+    echo '<button class="height-5 width-5" onclick="addLike('.$postID.','. $posterID.')" id="like-btn"><i class="fa-solid fa-heart"></i></button> <p id="post-likes-count-'.$postID.'">'. $likes .'</p>';
+    echo '</div>';
+    echo '</div>';
+}
+
+function loadPostANDComments($postID, $username, $isComment) {
+    include 'db_conn.php';
+
+    // Load the main post
+    if ($isComment) {
+        $postQuery = "SELECT * FROM comments WHERE post_id = '$postID'";
+    } else {
+        $postQuery = "SELECT * FROM posts WHERE post_id = '$postID'";
+    }
+    $postResult = $conn->query($postQuery);
+
+    if ($postResult && $postResult->num_rows > 0) {
+        $postRow = $postResult->fetch_assoc();
+        if ($isComment) {
+            generateComments($username, $postRow['user_id'], $postRow['content'], $postRow['likes'], $postRow['comment_id']);
+        } else {
+            generatePost($username, $postRow['user_id'], $postRow['content'], $postRow['likes'], $postRow['post_id']);
+        }
+    }
+
+    // Load the comments associated with the post
+    $commentsQuery = "SELECT * FROM comments WHERE post_id = '$postID'";
+    $commentsResult = $conn->query($commentsQuery);
+    if ($commentsResult) {
+        while ($commentRow = $commentsResult->fetch_assoc()) {
+            $username = loadUsername($commentRow['user_id'],$conn);
+                generateComments($username, $commentRow['user_id'], $commentRow['content'], $commentRow['likes'], $commentRow['comment_id']);
+            }
+        }
+}
+
+
+
+
+
+
+
+
 function loadPosts() {
-    include_once 'db_conn.php';
+    include 'db_conn.php';
     $query = "SELECT * FROM posts
               ORDER BY timestamp DESC
               LIMIT 3";
