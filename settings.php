@@ -1,11 +1,9 @@
 <?php
 
-session_start();
 include 'functions.php';
+session_start();
 checkLogin();
 
-$postID = $_GET['postID'];
-$username = $_GET['username'];
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -17,7 +15,7 @@ $username = $_GET['username'];
     <?php
     loadHeader();
 
-    loadPostANDComments($postID, $username, false);
+    loadSettings();
 
     loadFooter();
     ?>
@@ -26,3 +24,4 @@ $username = $_GET['username'];
     <script src="main.js"></script>
     </body>
     </html>
+

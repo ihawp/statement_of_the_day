@@ -13,9 +13,10 @@ alreadyLogged();
 </head>
 <body class="flex-column center-hor">
 <form id="register-form" class="flex-column center-vert center-hor height-100" action="registerVerify.php" method="POST">
-    <input type="email" placeholder="email" name="email" required>
-    <input type="text" placeholder="username" name="username" required>
-    <input type="password" placeholder="password" name="password" required>
+    <h1 id="logreg-text">register</h1>
+    <input id="logreg-input" type="email" placeholder="email" name="email" required>
+    <input id="logreg-input" type="text" placeholder="username" name="username" required>
+    <input id="logreg-input" type="password" placeholder="password" name="password" required>
     <button type="submit">submit</button>
     <?php
     // register error handling
@@ -23,7 +24,7 @@ alreadyLogged();
         $e = $_GET['error'];
         callError($e);
     } ?>
-    <p>Already have an account? <a href="login.php">Login.</a></p>
+    <p>Already have an account? <a id="logreg-link" href="login.php">Login.</a></p>
 </form>
 <script src="https://kit.fontawesome.com/99a47fae58.js" crossorigin="anonymous"></script>
 <script src="jquery1.js"></script>

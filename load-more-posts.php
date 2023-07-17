@@ -8,10 +8,13 @@ $offset = $_POST['offset'];
 $limit = $_POST['limit'];
 
 
+loadMorePosts($offset, $limit);
+
+function loadMorePosts($offset, $limit) {
     include_once 'db_conn.php';
 
     $query = "SELECT * FROM posts
-              ORDER BY timestamp DESC
+              ORDER BY RAND()
               LIMIT $limit OFFSET $offset";
 
     $result = $conn->query($query);
@@ -21,10 +24,12 @@ $limit = $_POST['limit'];
             $likes = $row['likes'];
             $postID = $row['post_id'];
             $s = loadUsername($id, $conn);
-            generatePost($s, $id, $row['content'], $likes, $postID);
+            $PFP = getPFP($id, $conn);
+            generatePost($s, $id, $row['content'], $likes, $postID, $PFP);
         }
     } else {
         echo 'No more posts found.';
     }
 
     $conn->close();
+}

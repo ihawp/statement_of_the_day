@@ -12,14 +12,16 @@ body {
     font-family: var(--font);
     margin: 0;
     font-size: 1em;
-    background-color: var(--third-color);
+    background-color: var(--primary-color);
     color: var(--fourth-color);
 }
 
 /* header */
 header {
     background-color: var(--primary-color);
-    margin-bottom: 50px;
+    position: fixed;
+    top: 0;
+    z-index: 2;
 }
 nav {
     justify-content: right;
@@ -28,26 +30,56 @@ nav {
     color: var(--fourth-color);
     font-size: 1.5em;
     margin: 30px;
-}
+    transition: all 0.25s ease;
+    border: transparent solid 2px;
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-underline-offset: 100000px;
+
+    padding: 10px;
+    border-radius: 50px;
+}
+    .button:hover {
+        border: var(--fourth-color) solid 2px;
+    }
+    .button i {
+        transition: all 0.25s ease;
+    }
+    .button:hover i {
+        transform: scale(0.85);
+    }
 /* footer */
 footer {
-    background-color: var(--primary-color);
-    margin-top: 50px;
+
 }
 
 /* login.php && register.php */
-#login-form {
-
+#logreg-text {
+    display: inline;
+    font-size: 4em;
 }
-#register-form {
-
-}
-button {
+#logreg-input {
     margin: 5px;
+    padding: 10px;
+    font-size: 2em;
+    font-family: var(--font);
+    color: black;
+    background-color: var(--fourth-color);
+
+    border: none;
 }
-input {
-    margin: 5px;
+#logreg-input::placeholder {
+    color: var(--primary-color);
+}
+#logreg-input::after {
+    background-color: transparent;
+}
+@media screen and (max-width: 500px) {
+    #logreg-input {
+        font-size: 1.5em;
+    }
 }
 #error-box {
     background-color: red;
@@ -55,9 +87,10 @@ input {
     padding: 20px;
     color: var(--fourth-color);
 }
-.noti-icon {
-    margin: 10px 10px 10px 20px;
+#logreg-link {
+    color: #9DB2BF;
 }
+/* */
 #success-box {
     background-color: green;
     border-radius: 50px;
@@ -65,41 +98,107 @@ input {
     color: var(--fourth-color);
 }
 .noti-icon {
-    margin: 10px 10px 10px 20px;
+    margin: 10px 20px 10px 10px;
 }
 
-#post-box {
-    padding: 25px;
-    border-radius: 50px;
+#post-box, #comment-box, #bio-box {
+    width: 500px;
+    height: 200px;
+    padding: 15px;
 
     font-family: var(--font);
-    font-size: 1.5em;
+    font-size: 2em;
 
-    background-color: #DDE6ED;
-    color: #526D82;
+    border: var(--fourth-color) solid 2px;
+
+    background-color: var(--fourth-color);
+    color: var(--second-color);
 }
     #post-box::placeholder {
-        color: #526D82;
+        color: var(--second-color);
     }
 
+/* edit bio (settings) */
+#bio-box {
+    width: 200px;
+    height: 100px;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+#help-button {
+    color: var(--fourth-color);
+}
 .post {
+    width: 500px;
     padding: 15px;
-    background-color: var(--second-color);
-    min-width: 30vw;
-    max-width: 30vw;
+    background-color: var(--primary-color);
 
-    border-bottom: solid #333333 2px;
+    border: solid #222222 2px;
+    border-top: solid #222222 1px;
+    border-bottom: solid #222222 1px;
+    cursor: pointer;
 }
-    .post p {
-
+.no-pointer {
+    cursor: default;
+}
+    .liked {
+        color: red;
     }
-
-
-.like-btn {
+    #post-likes-count {
+        margin-left: 5px;
+        margin-right: 20px;
+    }
+    #post-pfp {
+        width: 70px;
+        height: 70px;
+        object-fit: cover;
+        margin-right: 10px;
+        border-radius: 50px;
+    }
+    .post a {
+        color: var(--fourth-color);
+        text-underline-offset: 100000px;
+    }
+        .post a:hover {
+            text-underline-offset: 4px;
+        }
+    .post h1 {
+        font-size: 4vh;
+    }
+    .post p {
+        font-size: 3.5vh;
+    }
+#like-btn, #comment-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
     cursor: pointer;
+    font-size: 4vh;
+    margin: 5px;
+    transition: all 0.25s ease;
+    border: transparent solid 2px;
+    border-radius: 50px;
+    text-underline-offset: 100000px;
 }
-.comment-btn {
-    cursor: pointer;
+#comment-btn {
+    margin-left: 20px;
+    padding: 7px;
+}
+#comment-btn:hover {
+    border: limegreen solid 2px;
+    color: limegreen;
+}
+#comment-btn i, #like-btn i {
+    transition: all 0.25s ease;
+}
+
+#comment-btn:hover i, #like-btn:hover i {
+    transform: scale(0.85);
+}
+#like-btn:hover {
+    border: hotpink solid 2px;
+    color: hotpink;
 }
 .blur-background {
     background-color: rgb(0,0,0,0.5);
@@ -111,7 +210,144 @@ input {
 #comment-popup {
     display: none;
     flex-direction: column;
+    z-index: 2;
 }
+button {
+    margin: 25px;
+    padding: 25px;
+    width: 200px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--third-color);
+    border: none;
+    justify-self: center;
+    color: var(--primary-color);
+    font-weight: 400;
+    font-size: 2em;
+    font-family: var(--font);
+
+    border-radius: 50px;
+    transition: all 0.15s ease;
+    cursor: pointer;
+}
+    button:hover {
+        transform: scale(1.1);
+    }
+#follow-button {
+    font-size: 1.5em;
+    width: 150px;
+    height: 20px;
+    margin: 0 0 0 20px ;
+    cursor: pointer;
+}
+#follow-button:hover {
+    transform: scale(0.9);
+}
+#post-comment-button {
+    font-size: 1.5em;
+    width: max-content;
+    height: 20px;
+    cursor: pointer;
+}
+#comment-popup-x {
+    font-size: 1.5em;
+    cursor: pointer;
+    background-color: red;
+    padding: 15px 20px;
+    border-radius: 150px;
+    margin: 25px;
+
+    display: flex;
+    align-items: baseline;
+}
+/* profile info */
+#profile-info {
+    padding: 15px;
+    width: 500px;
+    border: black solid 2px;
+    background-color: black;
+}
+
+/* leaderboard custom */
+#leaderboard-custom {
+    width: 500px;
+    height: max-content;
+    padding: 50px 15px;
+    color: var(--fourth-color);
+    text-align: center;
+    margin-bottom: 15vh;
+    border-radius: 50px;
+}
+    #leaderboard-custom h2 {
+        font-size: 7vh;
+    }
+    #leaderboard-custom h3 {
+        font-size: 5vh;
+    }
+    #leaderboard-custom #like-btn {
+        transform: scale(1.3);
+    }
+.gold {
+    background-color: #FFD700;
+}
+.silver {
+    background-color: #C0C0C0;
+}
+.bronze {
+    background-color: #a26936;
+}
+#leaderboard-count {
+    margin-top: -55px;
+    margin-left: -500px;
+    position: absolute;
+    background-color: purple;
+    width: 150px;
+    height: 150px;
+    border-radius: 150px;
+    transform: rotate(-10deg);
+    font-size: 4em;
+}
+.likes-count-custom {
+    font-size: 1.3em;
+}
+
+/* upload pfp */
+.upload-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.upload-label {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.upload-input {
+    border: 1px solid #ccc;
+    padding: 8px;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.upload-button {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 30px;
+    transition: all 0.25s ease;
+}
+    .upload-button:hover {
+        transform: scale(1.1)
+    }
+
 
 /* REUSE flex classes */
 .flex-row { display: flex; flex-direction: row; }
@@ -122,6 +358,9 @@ input {
 .center-hor { align-items: center; }
 .center-vert { justify-content: center; }
 .no-resize { resize: none; }
+.margin-right-10 { margin-right: 10px; }
+.text-align-left { text-align: left; }
+.text-align-right { text-align: right; }
 
 /* REUSE width classes */
 .width-5 { width: 5vw; }
@@ -166,3 +405,70 @@ input {
 .height-90 { height: 90vh; }
 .height-95 { height: 95vh; }
 .height-100 { height: 100vh; }
+
+/* media queries */
+@media screen and (max-width: 500px) {
+    #profile-info {
+        padding: 5vw;
+        width: 90vw;
+    }
+    .post {
+        width: 85vw;
+        padding: 7.5vw;
+        border: none;
+        border-bottom: solid #222222 2px;
+    }
+    #post-box, #comment-box {
+        width: 85vw;
+        padding: 7vw;
+    }
+    .button {
+        margin: 25px;
+    }
+    header {
+        background-color: var(--primary-color);
+        position: fixed;
+        top: none;
+        bottom: 0;
+    }
+    #leaderboard-custom {
+        width: 85vw;
+        height: max-content;
+        padding: 7.5vw;
+        color: var(--fourth-color);
+        margin-bottom: 20vh;
+        border-radius: 0;
+    }
+        #leaderboard-count {
+            margin-top: -95px;
+            margin-left: -0px;
+            position: absolute;
+
+            background-color: purple;
+            width: 150px;
+            height: 150px;
+            border-radius: 150px;
+            transform: rotate(-10deg);
+            font-size: 4em;
+        }
+        #leaderboard-custom h2 {
+            font-size: 5vh;
+        }
+        #leaderboard-custom h3 {
+            font-size: 4vh;
+        }
+        #leaderboard-custom #like-btn {
+            transform: scale(1.3);
+        }
+        #custom-mobile-spacer {
+            height: 5vh;
+        }
+        #custom-mobile-spacer2 {
+            height: 10vh;
+        }
+}
+@media screen and (max-width: 752px) {
+    #logo {
+        display: none;
+    }
+}
